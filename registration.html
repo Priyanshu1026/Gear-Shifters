@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('assets/img/registration.jpg');
+            background-size: cover;
+            background-position: center;
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            height: 100vh;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 0px 30px;
+            width: 300px;
+        }
+        form{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            cursor: pointer; /* Change cursor to pointer */
+            /* Center the file input box */
+            position: relative;
+            overflow: hidden;
+        }
+
+        input[type="file"]::-webkit-file-upload-button {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            opacity: 10;
+        }
+        input[type="file"]::file-selector-button {
+            background-color: #0D6EFD;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            display: block;
+        }
+
+        span{
+          color: blue;
+          text-decoration: underline;
+        }
+
+        button {
+            background-color: #0D6EFD;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #075cdc;
+        }
+
+        .sign-in-link {
+            display: block;
+            margin-top: 10px;
+            color: #333;
+            text-decoration: none;
+        }
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <form onsubmit="return validateForm()">
+        <h2>User Registration</h2>
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <div id="email-error" class="error-message" style="display: none;"></div>
+
+        <label for="vehicle">Vehicle Number:</label>
+        <input type="text" id="vehicle" name="vehicle" required>
+
+        <label for="government-id">Upload Government ID (PDF, max 2MB):</label>
+        <input type="file" id="government-id" name="government-id" accept=".pdf" required>
+        <div id="pdf-size-error" class="error-message" style="display: none;"></div> 
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="confirm-password">Confirm Password:</label>
+        <input type="password" id="confirm-password" name="confirm-password" required>
+        <div id="password-error" class="error-message" style="display: none;"></div>
+
+        <button type="submit">Register</button>
+
+        <a href="signIn.html" class="sign-in-link">Already have an account? <span>Sign In</span></a>
+    </form>
+
+    <script>
+        function validateForm() {
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirm-password').value;
+
+            // Email regex pattern
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            // Validate email format
+            if (!emailPattern.test(email)) {
+                document.getElementById('email-error').style.display='block';
+                document.getElementById('email-error').innerText='Please enter valid Email ID'
+                return false;
+            }
+
+            // Validate password match
+            if (password !== confirmPassword) {
+                document.getElementById('password-error').style.display = 'block';
+                document.getElementById('password-error').innerText = 'Passwords do not match.';
+                return false;
+            } else {
+                document.getElementById('password-error').style.display = 'none';
+            }
+            // Validate password requirements
+            var passwordRequirementsRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{10,}$/;
+            if (!passwordRequirementsRegex.test(password)) {
+                document.getElementById('password-requirements').style.display = 'block';
+                return false;
+            } else {
+                document.getElementById('password-requirements').style.display = 'none';
+            }
+            if (governmentId && governmentId.size > 2 * 1024 * 1024) { // Max size: 2MB
+                document.getElementById('pdf-size-error').style.display = 'block';
+                document.getElementById('pdf-size-error').innerText = 'PDF size exceeds 2MB limit.';
+                return false;
+            } else {
+                document.getElementById('pdf-size-error').style.display = 'none';
+            }
+            // If all validations pass, the form can be submitted
+            return true;
+        }
+    </script>
+</body>
+</html>

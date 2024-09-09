@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Quiz</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Gp
+  * Template URL: https://bootstrapmade.com/gp-free-multipurpose-html-bootstrap-template/
+  * Updated: Mar 17 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    #video-container {
+      position: relative;
+      width: 100%;
+      height: 400px; /* Set the desired height */
+      overflow: hidden;
+    }
+
+    #myVideo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      filter: blur(2px); /* Add blur effect */
+    }
+
+    #text-overlay {
+      font-family: Raleway, sans-serif;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: yellow;
+      font-size: 40px;
+      text-align: center;
+    }
+    .quiz-container {
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .question {
+      margin-bottom: 20px;
+      background-color: aqua;
+      padding: 10px;
+      border: 2px solid black;
+      border-radius: 10px;
+    }
+    .question p{
+      font-weight: bold;
+    }
+    #quiz-form{
+      font-family: Raleway, sans-serif;
+      font-size: 24px;
+    }
+    #quiz-form button {
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.9);
+      border-radius: 4px;
+      padding: 7px 25px 8px 25px;
+      white-space: nowrap;
+      transition: 0.3s;
+      font-size: 18px;
+      font-weight: bold;
+      display: inline-block;
+      border: 2px solid #ffc451;
+    }
+
+    #quiz-form button:hover {
+      background: #ffbb38;
+      color: #343a40;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    #retry-btn, #home-btn{
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.9);
+      border-radius: 4px;
+      padding: 7px 25px 8px 25px;
+      white-space: nowrap;
+      transition: 0.3s;
+      font-size: 18px;
+      font-weight: bold;
+      display: inline-block;
+      border: 2px solid #ffc451;
+    }
+    #retry-btn:hover, #home-btn:hover{
+      background: #ffbb38;
+      color: #343a40;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top header-inner-pages">
+    <div class="container d-flex align-items-center justify-content-lg-between">
+
+      <h1 class="logo me-auto me-lg-0"><a href="index.html">Gear Shifters<span>.</span></a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto " href="index.html">Home</a></li>
+          <li><a class="nav-link scrollto" href="index.html#about">About</a></li>
+          <li><a class="nav-link scrollto" href="index.html#services">Services</a></li>
+          <li><a class="nav-link scrollto " href="index.html#portfolio">Products</a></li>
+          <li><a class="nav-link scrollto" href="index.html#contact">Contact</a></li>
+          <li><a href="signIn.html">Sign In</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+      <a href="registration.html" class="get-started-btn">Register</a>
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Quiz</h2>
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li>Quiz</li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+    <div id="video-container">
+      <video id="myVideo" autoplay loop muted>
+        <source src="ved.mov" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div id="text-overlay">
+        <p>Car Component Conundrum</p>
+      </div>
+    </div>
+    <section class="inner-page">
+      <div class="container">
+        <p>
+          <div class="quiz-container">
+            <h2 style="margin-bottom: 50px">
+              Think you're a car whiz? Prove it! Take our quiz and test your knowledge on the inner workings of your car. From sparking the engine to stopping on a dime, how well do you understand the hidden heroes under the hood?
+            </h2>
+            <form id="quiz-form" data-aos="fade-up" data-aos-delay="200">
+              <div class="question" data-aos="zoom-in">
+                <p>The spark plugs in a car engine are responsible for what?</p>
+                <label><input type="radio" name="q1" value="filter">Filtering air entering the engine</label><br>
+                <label><input type="radio" name="q1" value="ignite">Igniting the air-fuel mixture in the cylinders</label><br>
+                <label><input type="radio" name="q1" value="cool">Cooling the engine block</label><br>
+                <label><input type="radio" name="q1" value="regulate">Regulating the voltage of the battery</label><br>
+              </div>
+              <div class="question" data-aos="zoom-in">
+                <p>The main function of the radiator in a car's cooling system is to?</p>
+                <label><input type="radio" name="q2" value="generate">Generate heat for the engine bay</label><br>
+                <label><input type="radio" name="q2" value="dissipate">Dissipate heat from the engine coolant</label><br>
+                <label><input type="radio" name="q2" value="store">Store electrical energy for starting the car</label><br>
+                <label><input type="radio" name="q2" value="amplify">Amplify the engine's sound</label><br>
+              </div>
+              <div class="question" data-aos="zoom-in">
+                <p>What component in a car's braking system is responsible for converting pressure from the brake pedal into force on the wheels?</p>
+                <label><input type="radio" name="q3" value="pad">Brake pads</label><br>
+                <label><input type="radio" name="q3" value="disc">Brake discs</label><br>
+                <label><input type="radio" name="q3" value="master">Brake master cylinder</label><br>
+                <label><input type="radio" name="q3" value="abs">Anti-lock braking system (ABS) sensor</label><br>
+              </div>
+              <div class="question" data-aos="zoom-in">
+                <p>The air filter in a car is most similar in function to which of the following?</p>
+                <label><input type="radio" name="q4" value="spark">Spark plug</label><br>
+                <label><input type="radio" name="q4" value="purify">Air purifier</label><br>
+                <label><input type="radio" name="q4" value="battery">Battery</label><br>
+                <label><input type="radio" name="q4" value="radiator">Radiator</label><br>
+              </div>
+              <div class="question" data-aos="zoom-in">
+                <p>The valves in a car engine control the flow of what between the intake manifold, cylinders, and exhaust manifold?</p>
+                <label><input type="radio" name="q5" value="oil">Oil</label><br>
+                <label><input type="radio" name="q5" value="coolant">Coolant</label><br>
+                <label><input type="radio" name="q5" value="mixture">Air and fuel mixture and exhaust gases</label><br>
+                <label><input type="radio" name="q5" value="electricity">Electricity</label><br>
+              </div>
+              <div class="question" data-aos="zoom-in">
+                <p>What is the primary function of the alternator in a car's electrical system?</p>
+                <label><input type="radio" name="q6" value="start">To start the car engine</label><br>
+                <label><input type="radio" name="q6" value="recharge">To recharge the car battery while driving</label><br>
+                <label><input type="radio" name="q6" value="power">To provide power for the headlights only</label><br>
+                <label><input type="radio" name="q6" value="control">To control the spark timing in the engine</label><br>
+              </div>
+              <div class="question" data-aos="zoom-in">
+                <p>The components that absorb bumps and vibrations from the road to ensure a smooth ride are part of which car system?  </p>
+                <label><input type="radio" name="q7" value="brake">Braking system</label><br>
+                <label><input type="radio" name="q7" value="suspension">Suspension system</label><br>
+                <label><input type="radio" name="q7" value="exhaust">Exhaust system</label><br>
+                <label><input type="radio" name="q7" value="steering">Steering system</label><br>
+              </div>
+              <div class="question" data-aos="zoom-in">
+                <p>The instrument cluster behind the steering wheel displays information to the driver.  What does  NOT appear on a typical instrument cluster?</p>
+                <label><input type="radio" name="q8" value="speedometer">Speedometer</label><br>
+                <label><input type="radio" name="q8" value="odometer">Odometer</label><br>
+                <label><input type="radio" name="q8" value="fuel">Fuel Gauge</label><br>
+                <label><input type="radio" name="q8" value="engine">Engine oil pressure</label><br>
+              </div>
+              <div class="question" data-aos="zoom-in">
+                <p>When you turn the steering wheel, which car component directly translates that movement to the wheels?</p>
+                <label><input type="radio" name="q9" value="tie">Tie rods</label><br>
+                <label><input type="radio" name="q9" value="rack">Steering rack</label><br>
+                <label><input type="radio" name="q9" value="strut">Struts</label><br>
+                <label><input type="radio" name="q9" value="wheel">Wheel bearings</label><br>
+              </div>
+              <div class="question" data-aos="zoom-in">
+                <p>Modern cars use a variety of sensors to monitor different aspects of the engine's performance. Which of these is  LEAST likely to be a sensor used in a car engine?
+                </p>
+                <label><input type="radio" name="q10" value="oxygen">Oxygen sensor</label><br>
+                <label><input type="radio" name="q10" value="mass">Mass airflow sensor</label><br>
+                <label><input type="radio" name="q10" value="pressure">Tire pressure sensor</label><br>
+                <label><input type="radio" name="q10" value="light">Light sensor</label><br>
+              </div>
+              <div class="text-center">
+                <button type="submit" data-aos="zoom-in">Submit</button>
+              </div>
+            </form>
+          </div>
+          
+          <div id="result-modal" class="modal">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <h2 class="text-center">Quiz Result</h2>
+              <p id="quiz-score" class="text-center"></p>
+              <div class="text-center">
+                <button id="retry-btn">Retry Quiz</button>
+                <button id="home-btn">Return to Home</button>
+              </div>
+            </div>
+          </div>
+        </p>
+      </div>
+    </section>
+    
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-info">
+              <h3>Gear Shifters<span>.</span></h3>
+              <p>
+                VIT Katpadi <br>
+                TN 632014, IND<br><br>
+                <strong>Phone:</strong> +91 95086 10826<br>
+                <strong>Email:</strong> gearshifters@gmail.com<br>
+              </p>
+              <div class="social-links mt-3">
+                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Part Installation</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Parts Sales</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Performance Tuning</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Online Tutorials and Services</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Warranty on Parts and Services</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-6 footer-newsletter">
+            <h4>Our Newsletter</h4>
+            <p><strong>Join the VIP List!</strong>Sign up for our newsletter and be the first to know about new product launches, exclusive discounts, and members only content.</p>
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit" value="Subscribe">
+            </form>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Gear Shifters</span></strong>. All Rights Reserved
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script>
+    document.getElementById('quiz-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const answers = ['ignite', 'dissipate', 'master','purify','mixture','recharge','suspension','engine','rack','light'];
+      const formData = new FormData(this);
+      let score = 0;
+
+      for (let [key, value] of formData.entries()) {
+        if (answers.includes(value)) {
+          score++;
+        }
+      }
+
+      // Display quiz result modal
+      const modal = document.getElementById('result-modal');
+      const scoreDisplay = document.getElementById('quiz-score');
+      scoreDisplay.textContent = `You scored ${score}/${answers.length}`;
+      modal.style.display = 'block';
+
+      // Close modal on click outside or on close button
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+
+      document.querySelector('.close').onclick = function() {
+        modal.style.display = "none";
+      }
+
+      // Retry Quiz button functionality
+      document.getElementById('retry-btn').onclick = function() {
+        // Uncheck all radio buttons
+        const radioButtons = document.querySelectorAll('input[type="radio"]');
+        radioButtons.forEach(button => {
+          button.checked = false;
+        });
+        // Hide modal
+        modal.style.display = "none";
+      }
+
+      // Return to Home button functionality (you can change the URL to your home page)
+      document.getElementById('home-btn').onclick = function() {
+        window.location.href = "index.html"; // Change "index.html" to your home page URL
+      }
+    });
+  </script>
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
